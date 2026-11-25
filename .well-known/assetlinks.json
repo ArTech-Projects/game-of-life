@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.artechprojects.gameoflife",
+        "sha256_cert_fingerprints": ["A4:21:80:2C:84:8A:B1:30:70:76:27:A5:23:0E:C3:7F:1D:36:8B:81:72:00:FE:D5:9D:9C:CB:0E:27:FE:23:1B"]
+      }
+    }]
