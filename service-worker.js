@@ -7,7 +7,7 @@
  * PWA_CACHE_VERSION to ship a new shell; `activate` removes every older
  * `gol-v2-*` cache and any legacy `gol-shell-*` cache.
  *
- * Cache version: gol-v2-m6-final13.
+ * Cache version: gol-v2-m6-final14.
  *
  * Service workers only run on http(s); the app intentionally skips
  * registration under file:// and still works without a worker.
@@ -21,7 +21,7 @@ import {
   PWA_PRECACHE,
 } from './js/core/pwa.js';
 
-/** Resolves to `gol-v2-m6-final13`; bump PWA_CACHE_VERSION in js/core/pwa.js. */
+/** Resolves to `gol-v2-m6-final14`; bump PWA_CACHE_VERSION in js/core/pwa.js. */
 const CACHE_NAME = PWA_CACHE_VERSION;
 
 self.addEventListener('install', (event) => {
