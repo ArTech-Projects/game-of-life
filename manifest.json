@@ -1,0 +1,43 @@
+{
+    "name":  "The Game of Life V2",
+    "short_name":  "Life V2",
+    "description":  "A private, offline-first life RPG with real-life HP, quests, finance and rewards.",
+    "lang":  "en-PH",
+    "dir":  "ltr",
+    "id":  "./index.html",
+    "display":  "standalone",
+    "display_override":  [
+                             "standalone",
+                             "minimal-ui"
+                         ],
+    "orientation":  "portrait-primary",
+    "background_color":  "#07080c",
+    "theme_color":  "#07080c",
+    "categories":  [
+                       "lifestyle",
+                       "productivity",
+                       "games"
+                   ],
+    "icons":  [
+                  {
+                      "src":  "icons/ares.png",
+                      "sizes":  "512x512",
+                      "type":  "image/png",
+                      "purpose":  "any"
+                  },
+                  {
+                      "src":  "icons/thief.png",
+                      "sizes":  "512x512",
+                      "type":  "image/png",
+                      "purpose":  "maskable"
+                  },
+                  {
+                      "src":  "icons/atena.png",
+                      "sizes":  "512x512",
+                      "type":  "image/png",
+                      "purpose":  "any"
+                  }
+              ],
+    "start_url":  "./index.html",
+    "scope":  "./"
+}

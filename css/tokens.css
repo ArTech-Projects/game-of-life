@@ -1,0 +1,54 @@
+/* Design tokens — dark obsidian & gold. */
+:root {
+  color-scheme: dark;
+
+  --bg: #06070a;
+  --bg-deep: #040507;
+  --panel: rgba(20, 22, 29, 0.86);
+  --panel-solid: #12141b;
+  --panel-soft: rgba(255, 255, 255, 0.025);
+  --panel-line: rgba(255, 255, 255, 0.065);
+
+  --line: rgba(232, 195, 122, 0.14);
+  --line-strong: rgba(232, 195, 122, 0.34);
+
+  --gold: #e6c27a;
+  --gold-bright: #ffe6ad;
+  --gold-deep: #8a6425;
+  --gold-glow: rgba(230, 194, 122, 0.22);
+
+  --ink: #f5f1e6;
+  --muted: #a7a293;
+  --faint: #777265;
+
+  --ok: #76d9a4;
+  --warn: #e6b65e;
+  --danger: #e07a6b;
+
+  --hp-healthy: #6fd6a0;
+  --hp-wounded: #e6b65e;
+  --hp-exhausted: #e08a4f;
+  --hp-recovery: #df6b60;
+
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 13px;
+  --radius-sm: 10px;
+
+  --shell-max: 920px;
+  --nav-h: 74px;
+
+  --shadow-lg: 0 30px 80px -34px rgba(0, 0, 0, 0.9);
+  --shadow-md: 0 14px 38px -22px rgba(0, 0, 0, 0.85);
+
+  --font-display: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  --font-ui: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-num: "SF Mono", "Cascadia Mono", ui-monospace, Consolas, monospace;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  --ease-out: cubic-bezier(0.22, 0.8, 0.28, 1);
+}

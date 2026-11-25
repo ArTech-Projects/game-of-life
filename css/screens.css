@@ -1,0 +1,2228 @@
+/* Screen-level layout and milestone-specific previews. */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  animation: screen-in 0.34s var(--ease-out) both;
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------------------------------- Hero ------------------------------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 17px 17px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(230, 194, 122, 0.12), transparent 58%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.008) 58%),
+    rgba(13, 15, 21, 0.82);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  right: -54px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 194, 122, 0.16), transparent 68%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(230, 194, 122, 0.24), transparent);
+  pointer-events: none;
+}
+
+.hero__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.hero__eyebrow {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.milestone {
+  flex: 0 0 auto;
+  padding: 3px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(230, 194, 122, 0.06);
+  color: var(--gold);
+  font-size: 0.58rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.hero__title {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 2px;
+  font-family: var(--font-display);
+  font-size: clamp(1.52rem, 6.4vw, 2.05rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+  color: var(--gold-bright);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero__title {
+    background: linear-gradient(112deg, #fff4d8 0%, #e6c27a 46%, #b98d3d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+.hero__desc {
+  position: relative;
+  z-index: 1;
+  max-width: 60ch;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+/* ----------------------------- Core stats ---------------------------- */
+
+.core-grid {
+  margin-bottom: 2px;
+}
+
+@media (min-width: 820px) {
+  .core-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.core-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(100% 120% at 100% 0%, rgba(230, 194, 122, 0.05), transparent 60%),
+    rgba(255, 255, 255, 0.018);
+}
+
+.core-card__head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.core-card__emoji {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 0.95rem;
+}
+
+.core-card__id {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.core-card__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.79rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.core-card__rank {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.62rem;
+  color: var(--gold);
+}
+
+.core-card__level {
+  flex: 0 0 auto;
+  font-family: var(--font-num);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.core-card .track {
+  height: 5px;
+}
+
+.core-card__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-num);
+  font-size: 0.58rem;
+  color: var(--faint);
+}
+
+/* ------------------------------- Skills ------------------------------ */
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skill-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.skill-row__icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.skill-row__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.skill-row__body {
+  min-width: 0;
+}
+
+.skill-row__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.skill-row__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.77rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.skill-row__level {
+  flex: 0 0 auto;
+  font-family: var(--font-num);
+  font-size: 0.6rem;
+  color: var(--gold);
+}
+
+.skill-row .track {
+  height: 5px;
+}
+
+.skill-row__xp {
+  font-family: var(--font-num);
+  font-size: 0.58rem;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+/* ------------------------------- Wealth ------------------------------ */
+
+.wealth-hero {
+  text-align: center;
+  padding: 20px 16px;
+  background:
+    radial-gradient(90% 120% at 50% 0%, rgba(230, 194, 122, 0.13), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008)),
+    rgba(15, 17, 23, 0.8);
+}
+
+.wealth-hero__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 8.4vw, 2.55rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--gold-bright);
+  text-shadow: 0 0 34px rgba(230, 194, 122, 0.2);
+  overflow-wrap: anywhere;
+}
+
+.wealth-hero__formula {
+  margin-top: 7px;
+  color: var(--faint);
+  font-family: var(--font-num);
+  font-size: 0.63rem;
+  line-height: 1.55;
+}
+
+.wealth-hero__sync {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 13px;
+}
+
+/* ----------------------------- Goal blocks --------------------------- */
+
+.goal-block {
+  padding: 11px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.goal-block:first-child {
+  padding-top: 2px;
+  border-top: 0;
+}
+
+.goal-block__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.goal-block__name {
+  font-size: 0.8rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+/* ---------------------------- Profile card --------------------------- */
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.022);
+}
+
+.profile-card__avatar {
+  flex: 0 0 auto;
+  width: 54px;
+  height: 54px;
+  padding: 2px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: #0b0d12;
+  overflow: hidden;
+}
+
+.profile-card__avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-card__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.profile-card__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.profile-card__meta {
+  color: var(--faint);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+/* ----------------------------- Rewards ------------------------------- */
+
+.reward-row .chip {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 389px) {
+  .reward-row .chip {
+    display: none;
+  }
+
+  .row__reward {
+    font-size: 0.62rem;
+  }
+
+  .skill-row__xp {
+    display: none;
+  }
+}
+
+/* ------------------------------ M3 Today ----------------------------- */
+
+.recovery-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 15px;
+  border: 1px solid rgba(224, 122, 107, 0.46);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(224, 122, 107, 0.18), transparent 62%),
+    rgba(38, 15, 15, 0.72);
+  box-shadow: 0 18px 40px -26px rgba(224, 122, 107, 0.6);
+}
+
+.recovery-banner__icon {
+  flex: 0 0 auto;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.recovery-banner__body {
+  min-width: 0;
+}
+
+.recovery-banner__body strong {
+  display: block;
+  color: #f3a79c;
+  font-size: 0.86rem;
+  letter-spacing: 0.03em;
+}
+
+.recovery-banner__body p {
+  margin-top: 3px;
+  color: #d8a89f;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+/* Strict mode */
+
+.strict-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.strict-row__copy {
+  min-width: 0;
+}
+
+.strict-row__copy strong {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+.strict-row__copy p {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.73rem;
+  line-height: 1.5;
+}
+
+.strict-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 11px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
+  color: var(--faint);
+  font-size: 0.68rem;
+}
+
+.strict-meta__countdown {
+  color: var(--gold);
+  font-family: var(--font-num);
+  font-size: 0.66rem;
+  white-space: nowrap;
+}
+
+/* Switch */
+
+.switch {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 4px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--faint);
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.switch:hover {
+  border-color: var(--line-strong);
+}
+
+.switch__track {
+  position: relative;
+  width: 30px;
+  height: 16px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+  transition: background 0.2s;
+}
+
+.switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--faint);
+  transition: transform 0.2s var(--ease-out), background 0.2s;
+}
+
+.switch__label {
+  font-size: 0.64rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.switch[aria-checked="true"] {
+  border-color: rgba(230, 194, 122, 0.52);
+  background: rgba(230, 194, 122, 0.09);
+  color: var(--gold-bright);
+}
+
+.switch[aria-checked="true"] .switch__track {
+  background: rgba(230, 194, 122, 0.3);
+}
+
+.switch[aria-checked="true"] .switch__thumb {
+  background: var(--gold-bright);
+  transform: translateX(14px);
+}
+
+.switch--mini {
+  min-height: 30px;
+  padding: 3px 7px;
+  gap: 5px;
+}
+
+.switch--mini .switch__label {
+  font-size: 0.58rem;
+}
+
+/* Daily quests */
+
+.quest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.quest-card {
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.018);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.quest-card[data-state="completed"] {
+  border-color: rgba(118, 217, 164, 0.28);
+  background: rgba(118, 217, 164, 0.045);
+}
+
+.quest-card[data-state="skipped"] {
+  border-color: rgba(224, 122, 107, 0.26);
+  background: rgba(224, 122, 107, 0.04);
+}
+
+.quest-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.quest-card__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(230, 194, 122, 0.16);
+  border-radius: 11px;
+  background: rgba(0, 0, 0, 0.24);
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+.quest-card__icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.quest-card__id {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.quest-card__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.quest-card__name {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.quest-card__reward {
+  margin-top: 3px;
+  color: var(--gold);
+  font-size: 0.69rem;
+  line-height: 1.4;
+}
+
+.quest-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  color: var(--faint);
+  font-size: 0.64rem;
+}
+
+/* Reward/meta lines keep text and inline gold coins on one level baseline. */
+.reward-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.64rem;
+}
+
+.quest-card__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.quest-card__result {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+.quest-card__result--done {
+  color: #a6f0c8;
+}
+
+.quest-card__result--skip {
+  color: #e6a79d;
+}
+
+.quest-card__lock {
+  margin-top: 9px;
+  padding: 7px 9px;
+  border-radius: var(--radius-sm);
+  background: rgba(224, 122, 107, 0.08);
+  color: #e6a79d;
+  font-size: 0.69rem;
+  line-height: 1.45;
+}
+
+/* Bad habits */
+
+.habit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.habit-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 9px;
+  padding: 10px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.habit-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.habit-card[data-state="logged"] {
+  border-color: rgba(224, 122, 107, 0.28);
+  background: rgba(224, 122, 107, 0.045);
+}
+
+.habit-card__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.24);
+  font-size: 1.05rem;
+}
+
+.habit-card__icon img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.habit-card__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.habit-card__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.habit-card__name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.habit-card__meta {
+  margin-top: 2px;
+  color: var(--faint);
+  font-size: 0.64rem;
+  line-height: 1.4;
+}
+
+.habit-card__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.habit-card__actions .crud-actions {
+  margin-left: auto;
+}
+
+.habit-card__actions .btn {
+  min-height: 30px;
+  padding: 0 9px;
+  font-size: 0.66rem;
+}
+
+.restraint-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 9px 11px;
+  border: 1px solid rgba(118, 217, 164, 0.26);
+  border-radius: var(--radius-sm);
+  background: rgba(118, 217, 164, 0.055);
+  color: #b9efd2;
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+/* Reflection journal */
+
+.journal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 12px;
+}
+
+.mood-picker {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.mood-picker__row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.mood-option {
+  position: relative;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.mood-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mood-option__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 7px 3px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.mood-option__emoji {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.mood-option__label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--faint);
+  letter-spacing: 0.02em;
+}
+
+.mood-option input:checked + .mood-option__body {
+  border-color: rgba(230, 194, 122, 0.5);
+  background: rgba(230, 194, 122, 0.09);
+}
+
+.mood-option input:checked + .mood-option__body .mood-option__label {
+  color: var(--gold-bright);
+}
+
+.mood-option input:focus-visible + .mood-option__body {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
+
+.journal-field {
+  display: block;
+}
+
+.journal-field textarea {
+  width: 100%;
+  min-height: 54px;
+  padding: 9px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.45;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.journal-field textarea:focus {
+  outline: none;
+  border-color: var(--line-strong);
+  box-shadow: 0 0 0 3px rgba(230, 194, 122, 0.09);
+}
+
+.journal-field textarea::placeholder {
+  color: #5f5b51;
+}
+
+.journal-form__foot {
+  margin-top: 1px;
+}
+
+.journal-receipt {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 9px 10px;
+  border: 1px solid rgba(118, 217, 164, 0.24);
+  border-radius: var(--radius-sm);
+  background: rgba(118, 217, 164, 0.045);
+}
+
+.journal-receipt .btn {
+  margin-left: auto;
+}
+
+@media (min-width: 640px) {
+  .quest-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .habit-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 389px) {
+  .habit-card {
+    align-items: stretch;
+  }
+
+  .habit-card__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .habit-card__actions .crud-actions {
+    margin-left: 0;
+  }
+
+  .mood-picker__row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch__thumb,
+  .switch__track,
+  .quest-card,
+  .mood-option__body {
+    transition: none;
+  }
+}
+
+/* --------------------------- M4 progression -------------------------- */
+
+.chip--gold {
+  border-color: rgba(230, 194, 122, 0.4);
+  background: rgba(230, 194, 122, 0.12);
+  color: var(--gold-bright);
+}
+
+.skill-row__next {
+  display: block;
+  margin-top: 4px;
+  color: var(--faint);
+  font-family: var(--font-num);
+  font-size: 0.58rem;
+  line-height: 1.35;
+}
+
+.quest-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.quest-filter__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.quest-filter__btn:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.quest-filter__btn[aria-pressed="true"] {
+  border-color: rgba(230, 194, 122, 0.55);
+  background: rgba(230, 194, 122, 0.12);
+  color: var(--gold-bright);
+}
+
+.quest-filter__count {
+  display: grid;
+  place-items: center;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  font-family: var(--font-num);
+  font-size: 0.58rem;
+  color: inherit;
+}
+
+.side-quest-card[hidden] {
+  display: none;
+}
+
+.side-quest-card .quest-card__actions {
+  align-items: center;
+}
+
+.side-quest-card[data-state="completed"] {
+  border-color: rgba(118, 217, 164, 0.28);
+  background: rgba(118, 217, 164, 0.045);
+}
+
+.quest-list--progression {
+  margin-top: 2px;
+}
+
+/* Goals & missions */
+
+.goal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.goal-card {
+  padding: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(110% 120% at 100% 0%, rgba(230, 194, 122, 0.055), transparent 62%),
+    rgba(255, 255, 255, 0.018);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.goal-card[data-state="ready"] {
+  border-color: rgba(230, 194, 122, 0.34);
+}
+
+.goal-card[data-state="completed"] {
+  border-color: rgba(118, 217, 164, 0.28);
+  background: rgba(118, 217, 164, 0.04);
+}
+
+.goal-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.goal-card__id {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.goal-card__name {
+  font-size: 0.9rem;
+  font-weight: 750;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.goal-card__meta {
+  color: var(--faint);
+  font-size: 0.65rem;
+  line-height: 1.45;
+}
+
+.goal-card__progress {
+  margin-top: 11px;
+}
+
+.goal-card__progress-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+.goal-card__percent {
+  color: var(--gold);
+  font-family: var(--font-num);
+}
+
+.goal-card__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.goal-card__result {
+  color: #a6f0c8;
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.goal-card__empty {
+  margin-top: 10px;
+  color: var(--faint);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.mission-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 11px;
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.mission-card {
+  padding: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.17);
+}
+
+.mission-card[data-state="completed"] {
+  border-color: rgba(118, 217, 164, 0.24);
+  background: rgba(118, 217, 164, 0.035);
+}
+
+.mission-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mission-card__id {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mission-card__name {
+  font-size: 0.79rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.mission-card__meta {
+  color: var(--faint);
+  font-size: 0.63rem;
+  line-height: 1.45;
+}
+
+.mission-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.mission-card__reward {
+  color: var(--gold);
+  font-family: var(--font-num);
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.mission-card__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.mission-card__result {
+  color: #a6f0c8;
+  font-size: 0.68rem;
+}
+
+/* --------------------------- Celebration ----------------------------- */
+
+.celebration {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: calc(18px + var(--safe-top)) 16px calc(18px + var(--safe-bottom));
+  opacity: 0;
+  transition: opacity 0.24s var(--ease-out);
+}
+
+.celebration.is-in {
+  opacity: 1;
+}
+
+.celebration.is-closing {
+  opacity: 0;
+}
+
+.celebration__backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(70% 55% at 50% 32%, rgba(230, 194, 122, 0.18), transparent 65%),
+    rgba(2, 3, 5, 0.8);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+.celebration__card {
+  position: relative;
+  z-index: 1;
+  width: min(94vw, 460px);
+  max-height: calc(100dvh - 36px);
+  overflow-y: auto;
+  padding: 22px 19px 20px;
+  border: 1px solid rgba(230, 194, 122, 0.44);
+  border-radius: 26px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(230, 194, 122, 0.2), transparent 62%),
+    linear-gradient(180deg, #1a1c25, #0b0d13 68%);
+  box-shadow: 0 36px 90px -34px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  text-align: center;
+  transform: translateY(18px) scale(0.965);
+  transition: transform 0.34s var(--ease-out);
+}
+
+.celebration.is-in .celebration__card {
+  transform: none;
+}
+
+.celebration__eyebrow {
+  font-size: 0.61rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.celebration__seal {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin: 12px auto 10px;
+  border: 1px solid rgba(230, 194, 122, 0.4);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255, 230, 173, 0.22), transparent 62%),
+    rgba(230, 194, 122, 0.07);
+  box-shadow: 0 0 40px -8px rgba(230, 194, 122, 0.45);
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.celebration__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.36rem, 6vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.16;
+  color: var(--gold-bright);
+  text-wrap: balance;
+}
+
+.celebration__rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.celebration__rank-title {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.celebration__rank-dot {
+  color: var(--faint);
+}
+
+.celebration__rewards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 15px;
+}
+
+.celebration__reward {
+  padding: 6px 11px;
+  border: 1px solid rgba(230, 194, 122, 0.4);
+  border-radius: 999px;
+  background: rgba(230, 194, 122, 0.11);
+  color: var(--gold-bright);
+  font-family: var(--font-num);
+  font-size: 0.7rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.celebration__note {
+  max-width: 34ch;
+  margin: 13px auto 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.celebration__close {
+  width: 100%;
+  margin-top: 17px;
+}
+
+.celebration__confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.celebration__piece {
+  position: absolute;
+  top: -12vh;
+  left: var(--x, 50%);
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  opacity: 0.9;
+  animation: celebration-fall var(--duration, 2.6s) linear var(--delay, 0s) infinite;
+}
+
+.celebration__piece--round {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+@keyframes celebration-fall {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), 118vh, 0) rotate(var(--spin, 720deg));
+  }
+}
+
+.celebration--reduced .celebration__card {
+  transform: none;
+  transition: none;
+}
+
+@media (min-width: 640px) {
+  .goal-list {
+    gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quest-filter__btn,
+  .goal-card,
+  .celebration,
+  .celebration__card {
+    transition: none;
+  }
+
+  .celebration__confetti {
+    display: none;
+  }
+
+  .celebration__piece {
+    animation: none;
+  }
+}
+
+
+/* ------------------------------- M5 Finance -------------------------- */
+
+.finance-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.finance-section {
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.022);
+}
+
+.finance-section__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.finance-section__title {
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.finance-section__total {
+  font-family: var(--font-num);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+
+.finance-section__empty {
+  margin: 0;
+  color: var(--faint);
+  font-size: 0.74rem;
+}
+
+.money-list {
+  display: grid;
+  gap: 6px;
+}
+
+/* Expanded lists keep every matching row in a ~5-entry scroll box. */
+.money-list--expanded {
+  max-height: 330px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+  scrollbar-gutter: stable;
+}
+
+.money-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.money-item__icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.95rem;
+}
+
+.money-item__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.money-item__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.money-item__meta,
+.money-item__note {
+  color: var(--faint);
+  font-size: 0.64rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.money-item__amount {
+  font-family: var(--font-num);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.money-item__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.token-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.token-row:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.token-row__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.token-row__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.token-row__body strong {
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+
+.rest-day-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(92, 200, 255, 0.24);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, rgba(92, 200, 255, 0.1), rgba(92, 200, 255, 0.03));
+}
+
+.rest-day-banner__icon {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+}
+
+.rest-day-banner__body strong {
+  display: block;
+  color: #b9e8ff;
+  font-size: 0.82rem;
+}
+
+.rest-day-banner__body p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 430px) {
+  .finance-section__head {
+    flex-wrap: wrap;
+  }
+
+  .finance-section__total {
+    order: 3;
+    width: 100%;
+  }
+}
+
+/* ------------------------- M6 finance polish ------------------------ */
+
+.date-control input[readonly] {
+  cursor: pointer;
+}
+
+.finance-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  gap: 9px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.022);
+}
+
+.finance-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.finance-filter[hidden] {
+  display: none;
+}
+
+.finance-filter__label {
+  color: var(--faint);
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.select--filter {
+  width: 100%;
+  min-height: 34px;
+  font-size: 0.68rem;
+}
+
+.input--filter {
+  width: 100%;
+  min-height: 34px;
+  padding: 0 9px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--ink);
+  font-size: 0.72rem;
+}
+
+.input--filter:focus {
+  outline: none;
+  border-color: var(--line-strong);
+  box-shadow: 0 0 0 3px rgba(230, 194, 122, 0.09);
+}
+
+.finance-section__count {
+  display: block;
+  margin: -5px 0 8px;
+  color: var(--faint);
+  font-size: 0.6rem;
+}
+
+.money-item--compact {
+  padding: 7px 9px;
+}
+
+.money-item--compact .money-item__icon {
+  width: 29px;
+  height: 29px;
+  font-size: 0.84rem;
+}
+
+.money-item--compact .money-item__actions .btn {
+  min-height: 28px;
+  padding: 0 9px;
+  font-size: 0.64rem;
+}
+
+.finance-more {
+  width: 100%;
+  margin-top: 8px;
+}
+
+#finance-adjust-dialog .sheet__lede {
+  margin-bottom: 14px;
+}
+
+/* --------------------------- M6 settings ---------------------------- */
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.settings-row__index {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--gold);
+  font-family: var(--font-num);
+  font-size: 0.62rem;
+}
+
+.settings-row__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.settings-row__body strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+.settings-row__meta {
+  color: var(--faint);
+  font-size: 0.63rem;
+  line-height: 1.4;
+}
+
+.settings-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-details__item {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.016);
+  overflow: hidden;
+}
+
+.settings-details__summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.settings-details__summary::-webkit-details-marker {
+  display: none;
+}
+
+.settings-details__item[open] .settings-details__summary {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.settings-details__item .settings-list {
+  padding: 8px;
+}
+
+.panel--danger {
+  border-color: rgba(224, 122, 107, 0.26);
+  background:
+    radial-gradient(110% 120% at 100% 0%, rgba(224, 122, 107, 0.07), transparent 62%),
+    rgba(255, 255, 255, 0.018);
+}
+
+.settings-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(230, 194, 122, 0.24);
+  border-radius: var(--radius-md);
+  background: rgba(230, 194, 122, 0.06);
+}
+
+.settings-warning p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.backup-preview {
+  margin-bottom: 13px;
+}
+
+.backup-preview__title {
+  margin: 0 0 8px;
+  color: var(--gold-bright);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.backup-preview__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.backup-preview__profiles {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.backup-preview__profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.backup-preview__profile strong {
+  color: var(--ink);
+}
+
+.backup-preview__errors {
+  margin: 0;
+  padding-left: 18px;
+  color: #ffb3a7;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+/* --------------------- M6 row action integration --------------------- */
+
+.skill-row {
+  grid-template-columns: 34px minmax(0, 1fr) auto auto;
+}
+
+.crud-menu {
+  position: relative;
+  display: inline-flex;
+  justify-self: end;
+}
+
+.crud-menu.is-open {
+  z-index: 5;
+}
+
+.crud-menu__toggle {
+  min-width: 34px;
+  padding-inline: 8px;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.crud-menu__pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  display: grid;
+  gap: 2px;
+  min-width: 132px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #12141b;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+}
+
+.crud-menu__item {
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.crud-menu__item:hover,
+.crud-menu__item:focus-visible {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.crud-menu__item--danger {
+  color: #ff9d8f;
+}
+
+/* ------------------------- RPG Reward Vault ------------------------- */
+
+.reward-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  grid-template-areas: 'emblem body buy menu';
+  align-items: center;
+  gap: 10px 12px;
+  margin-top: 9px;
+  padding: 12px;
+  border: 1px solid rgba(232, 195, 122, 0.2);
+  border-radius: 16px;
+  background:
+    radial-gradient(130% 160% at 0% 0%, rgba(230, 194, 122, 0.1), transparent 52%),
+    linear-gradient(160deg, rgba(31, 28, 21, 0.92), rgba(13, 14, 19, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 26px -20px rgba(0, 0, 0, 0.95);
+}
+
+.reward-card__emblem {
+  grid-area: emblem;
+  grid-row: 1 / -1;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 32% 26%, rgba(255, 230, 173, 0.28), rgba(138, 100, 37, 0.14) 55%, rgba(0, 0, 0, 0.4));
+  box-shadow:
+    0 0 18px rgba(230, 194, 122, 0.2),
+    inset 0 0 0 1px rgba(255, 230, 173, 0.14);
+  overflow: hidden;
+}
+
+.reward-card__img {
+  width: 100%;
+  height: 100%;
+  padding: 6px;
+  object-fit: contain;
+}
+
+.reward-card__body {
+  grid-area: body;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.reward-card__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.reward-card__name {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.reward-card__badge {
+  flex: 0 0 auto;
+  padding: 2px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--faint);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.reward-card__badge.is-redeemed {
+  border-color: var(--line-strong);
+  background: rgba(230, 194, 122, 0.12);
+  color: var(--gold-bright);
+}
+
+.reward-card__tag {
+  color: var(--gold);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reward-card__buy {
+  grid-area: buy;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.reward-card__price {
+  font-family: var(--font-num);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.reward-card__price.is-affordable {
+  color: var(--gold-bright);
+}
+
+.reward-card__redeem {
+  min-width: 78px;
+  justify-content: center;
+  border-radius: 999px;
+}
+
+.reward-card .crud-menu {
+  grid-area: menu;
+  align-self: center;
+  justify-self: end;
+}
+
+@media (max-width: 560px) {
+  .reward-card {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'emblem body menu'
+      'emblem buy buy';
+  }
+
+  .reward-card__buy {
+    justify-content: flex-end;
+  }
+}
+
+/* --------------- Compact active passes & buffs bar ------------------- */
+
+.panel--passes .panel__head {
+  margin-bottom: 8px;
+}
+
+.passes-bar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.pass-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pass-chip.is-active {
+  border-color: rgba(232, 195, 122, 0.3);
+  background: linear-gradient(180deg, rgba(230, 194, 122, 0.1), rgba(230, 194, 122, 0.03));
+}
+
+.pass-chip__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.22);
+  font-size: 0.86rem;
+}
+
+.pass-chip__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.pass-chip__label {
+  color: var(--faint);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pass-chip__value {
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.pass-chip.is-active .pass-chip__value {
+  color: var(--gold-bright);
+}
+
+.pass-chip__hint {
+  color: var(--faint);
+  font-size: 0.6rem;
+  line-height: 1.3;
+}
+
+@media (max-width: 430px) {
+  .passes-bar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --------------- M6 final polish: card ⋮ menus & coin tile ----------- */
+
+/* Daily quest header: Strict switch + ⋮ share the card's top-right corner. */
+.quest-card__tools {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.crud-menu--card .crud-menu__toggle {
+  min-width: 30px;
+  min-height: 30px;
+  padding-inline: 6px;
+  font-size: 1rem;
+}
+
+/* Bad habit header: ⋮ sits beside the Restraint / Logged chip. */
+.habit-card__title-row .crud-menu--card {
+  margin-left: auto;
+}
+
+/* Side / Secret quests: ⋮ is pinned to the top-right header. */
+.side-quest-card .quest-card__head > .crud-menu--card {
+  align-self: flex-start;
+}
+
+/* Bottom action row keeps Complete / Skip (or Log relapse) on one line. */
+.quest-card__actions,
+.habit-card__actions {
+  gap: 6px;
+}
+
+/* Crisp gold coin emblem (shared minted rim lives in shell.css). */
+.tile__icon .coin-emblem,
+.tile__icon .coin-dot {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin-top: 1px;
+}
+
+@media (max-width: 430px) {
+  .quest-card__actions .btn,
+  .habit-card__actions .btn {
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 0.68rem;
+  }
+
+  .quest-card__head {
+    gap: 8px;
+  }
+
+  .quest-card__tools {
+    gap: 4px;
+  }
+}
+
+@media (max-width: 430px) {
+  .finance-filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .skill-row {
+    grid-template-columns: 34px minmax(0, 1fr) auto auto;
+  }
+
+  .backup-preview__profile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}

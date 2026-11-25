@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>M1 + M2 + M3 + M4 + M5 + M6 Parity - The Game of Life V2</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #131a2e;
+      --line: #24304d;
+      --text: #e8edf7;
+      --muted: #93a2bf;
+      --good: #52e0a4;
+      --bad: #ff6b81;
+      --gold: #ffcf5c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 32px 18px 60px;
+      background: radial-gradient(1000px 500px at 20% -10%, #1b2a4d 0%, var(--bg) 55%);
+      color: var(--text);
+      font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    main { max-width: 960px; margin: 0 auto; }
+    h1 { font-size: 1.25rem; margin: 0 0 4px; letter-spacing: 0.02em; }
+    .sub { color: var(--muted); margin: 0 0 20px; font-size: 0.85rem; }
+    .badge {
+      display: inline-flex; gap: 8px; align-items: center;
+      border: 1px solid var(--line); background: var(--panel);
+      border-radius: 999px; padding: 6px 12px; margin-bottom: 16px;
+      font-size: 0.8rem; color: var(--muted);
+    }
+    #summary { font-weight: 700; color: var(--gold); }
+    #summary.pass { color: var(--good); }
+    #summary.fail { color: var(--bad); }
+    pre {
+      margin: 0; padding: 18px; background: var(--panel);
+      border: 1px solid var(--line); border-radius: 14px;
+      white-space: pre-wrap; word-break: break-word;
+      font-size: 12.5px; line-height: 1.7;
+      box-shadow: 0 20px 60px rgb(0 0 0 / 35%);
+    }
+    .hint { color: var(--muted); margin-top: 14px; font-size: 0.78rem; }
+    button {
+      font: inherit; color: var(--text); background: #1d2942;
+      border: 1px solid var(--line); border-radius: 10px;
+      padding: 8px 14px; cursor: pointer; margin-top: 14px;
+    }
+    button:hover { border-color: #3b4f7a; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>🧪 The Game of Life V2 — M1 + M2 + M3 + M4 + M5 + M6 Parity Suite</h1>
+    <p class="sub">Permanent math + verified King.Arts13 seed (Notion export, 2026-11-15) + CRUD/settings/backup/PWA checks.</p>
+    <div class="badge">Status <span id="summary">running…</span></div>
+    <pre id="results" aria-live="polite">Running parity tests…</pre>
+    <button type="button" id="rerun">Re-run tests</button>
+    <p class="hint">Headless: <code>tools/run-selftest.ps1</code> · Browser: open this page from a local static server.</p>
+  </main>
+
+  <script type="module">
+    import { runParityTests, formatParityReport } from './js/tests/parity.js';
+
+    const output = document.getElementById('results');
+    const summary = document.getElementById('summary');
+
+    function render() {
+      try {
+        const report = runParityTests();
+        output.textContent = formatParityReport(report);
+        summary.textContent = report.ok
+          ? `PASS · ${report.passed}/${report.total} in ${report.durationMs} ms`
+          : `FAIL · ${report.failed} of ${report.total} failed`;
+        summary.className = report.ok ? 'pass' : 'fail';
+        document.title = `${report.ok ? 'PASS' : 'FAIL'} — M1 + M2 + M3 + M4 + M5 + M6 Parity`;
+      } catch (error) {
+        output.textContent = `SUITE ERROR\n${error?.stack || error}`;
+        summary.textContent = 'ERROR';
+        summary.className = 'fail';
+        document.title = 'ERROR — M1 + M2 + M3 + M4 + M5 + M6 Parity';
+      }
+    }
+
+    document.getElementById('rerun').addEventListener('click', render);
+    render();
+  </script>
+</body>
+</html>
