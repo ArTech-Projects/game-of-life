@@ -1732,3 +1732,6 @@
     animation: none;
   }
 }
+
+/* Wrap long continuous quest titles on narrow mobile screens */
+.quest-title, .quest-card-title, .item-title { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
